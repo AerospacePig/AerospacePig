@@ -9,7 +9,7 @@ const routes = [
         component: Home,
     },
     {
-        path: '/itemPage/:id/:title/:author/:date',
+        path: '/itemPage/:id',
         name: 'itemPage',
         component: ItemPage,
         props: true

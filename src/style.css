@@ -36,7 +36,6 @@ h1 {
 
 button {
   font-weight: 500;
-  font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -53,10 +52,33 @@ button:focus-visible {
 #app {
   width: 100%;
   height: 100%;
-  text-align: center;
+  overflow: hidden scroll;
+}
+#app::-webkit-scrollbar {
+  display: none;
 }
 
 .window-class {
   border-radius: 10px;
   overflow: hidden;
+}
+
+@font-face {
+  font-family: DancingScript;
+  src: url('assets/fonts/DancingScript-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: JetBrainsMono;
+  src: url('assets/fonts/JetBrainsMono-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: SquareItalics;
+  src: url('assets/fonts/方正楷体-简体.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: SquareSong;
+  src: url('assets/fonts/方正仿宋-简体.ttf') format('truetype');
 }

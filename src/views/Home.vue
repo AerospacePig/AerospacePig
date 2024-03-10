@@ -17,16 +17,19 @@
     <PageHeader></PageHeader>
   </div>
 
-  <div v-show="currentRoute() === 'home'" class="items">
-    <Items></Items>
-  </div>
+  <div class="page-content">
+    <div class="main">
+      <div class="items">
+        <Items></Items>
+      </div>
+      <div class="item-page" v-show="currentRoute() === 'itemPage'">
+        <ItemPage></ItemPage>
+      </div>
+    </div>
 
-  <div v-show="currentRoute() === 'itemPage'" class="item-page">
-    <ItemPage></ItemPage>
-  </div>
-
-  <div class="sidebar">
-    <Sidebar></Sidebar>
+    <div class="sidebar">
+      <Sidebar></Sidebar>
+    </div>
   </div>
 
   <div class="page-foot">
@@ -35,5 +38,29 @@
 </template>
 
 <style scoped lang="scss">
-
+  .page-header {
+    width: 100%;
+    height: 150px;
+    padding-top: 40px;
+  }
+  .page-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: auto;
+    .main {
+      width: 65%;
+    }
+    .sidebar {
+      width: 25%;
+      height: auto;
+    }
+  }
+  .page-foot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 180px;
+  }
 </style>
