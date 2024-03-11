@@ -77,8 +77,3 @@ button:focus-visible {
   font-family: SquareItalics;
   src: url('assets/fonts/方正楷体-简体.ttf') format('truetype');
 }
-
-@font-face {
-  font-family: SquareSong;
-  src: url('assets/fonts/方正仿宋-简体.ttf') format('truetype');
-}

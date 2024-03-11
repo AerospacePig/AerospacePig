@@ -40,7 +40,7 @@
 <style scoped lang="scss">
   .page-header {
     width: 100%;
-    height: 150px;
+    height: 170px;
     padding-top: 40px;
   }
   .page-content {

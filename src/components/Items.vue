@@ -1,4 +1,4 @@
-<script setup>
+<script setup>    
   import { ref, onMounted } from 'vue';
   import { useRouter } from 'vue-router';
   import axios from 'axios';
@@ -28,7 +28,7 @@
     let pageCount = eachPageItemCount;
 
     for (let i = 0; i < objArray.value.length; i += eachPageItemCount) {
-      pageArray.value.push(objArray.value.slice(i, pageCount));
+      pageArray.value.push(objArray.value.slice(i, pageCount)); // slice的拆分结果返回一个新数组
       pageCount += eachPageItemCount;
     }
   }
@@ -39,6 +39,7 @@
       objArray.value = Object.values(retultJson.data);
       splitObjArrayIntoPage();
       currentPageArray.value = pageArray.value[currentPageIndex.value];
+      buttonDisplay();
     })
   }
 
@@ -47,6 +48,7 @@
       currentPageIndex.value -= 1;
       currentPageArray.value = pageArray.value[currentPageIndex.value];
     }
+    buttonDisplay();
   }
 
   const downPage = () => {
@@ -54,14 +56,69 @@
       currentPageIndex.value += 1;
       currentPageArray.value = pageArray.value[currentPageIndex.value];
     }
+    buttonDisplay();
   }
 
   const pageSkip = (pageIndex) => {
-    console.log(pageIndex)
-    if (pageIndex < pageArray.value.length) {
-      if (pageIndex || pageIndex === 0) {
-        currentPageIndex.value = pageIndex;
-        currentPageArray.value = pageArray.value[pageIndex];
+    if (pageIndex || pageIndex === 0) {
+      currentPageIndex.value = pageIndex;
+      currentPageArray.value = pageArray.value[pageIndex];
+    }
+    buttonDisplay();
+  }
+
+  // 以下是分页的所有情况(4种):
+
+  // 1 2 3 4 总页数 <= 4
+  // 1 2 3 4
+  // 1 2 3 4
+  // 1 2 3 4
+
+  // 1 2 3 ... 5 总页数 == 5
+  // 1 2 3 ... 5
+  // 1 2 3 4 5
+  // 1 ... 3 4 5
+  // 1 ... 3 4 5
+
+  // 1 2 3 ... 6 总页数 == 6
+  // 1 2 3 ... 6
+  // 1 2 3 4 ... 6
+  // 1 ... 3 4 5 6
+  // 1 ... 4 5 6
+  // 1 ... 4 5 6
+
+  // 1 2 3 ... 7 总页数 >= 7
+  // 1 2 3 ... 7
+  // 1 2 3 4 ... 7
+  // 1 ... 3 4 5 ... 7 *
+  // 1 ... 4 5 6 7
+  // 1 ... 5 6 7
+  // 1 ... 5 6 7
+
+  const button_1_display = ref(false);
+  const button_2_display = ref(false);
+  const button_3_display = ref(false);
+  const button_4_display = ref(false);
+  const buttonArray = ref([]);
+
+  const buttonDisplay = () => {
+    buttonArray.value = []; // 清空
+    if (pageArray.value.length >= 5) {
+      button_1_display.value = true;
+      button_2_display.value = currentPageIndex.value - 1 > 1 ? true : false;
+      button_3_display.value = pageArray.value.length - 1 > currentPageIndex.value + 2 ? true : false;
+      button_4_display.value = true;
+
+      if (currentPageIndex.value <= 1) {
+        buttonArray.value.push(2, 3)
+      } else if (pageArray.value.length - 2 <= currentPageIndex.value) {
+        buttonArray.value.push(pageArray.value.length - 2, pageArray.value.length - 1)
+      } else {
+        buttonArray.value.push(currentPageIndex.value, currentPageIndex.value + 1, currentPageIndex.value + 2)
+      }
+    } else {
+      for (let i = 1; i <= pageArray.value.length; i++) {
+        buttonArray.value.push(i);
       }
     }
   }
@@ -75,6 +132,10 @@
     } else {
       return false;
     }
+  }
+
+  const backgoundChange = (pageCount) => {
+    return currentPageIndex.value + 1 === pageCount ? true : false;
   }
 
   onMounted(() => {
@@ -100,13 +161,13 @@
       </div>
     </div>
 
-    <div class="buttons">
+    <div class="paging" v-show="currentRoute() === 'home'">
       <button v-show="currentPageIndex > 0" @click="upPage">&laquo;&nbsp;前一页</button>
-      <button v-for="(data, index) in pageArray" :key="index">{{ index + 1 }}</button>
-      <!-- <button @click="pageSkip(pageArray.length < 4 ? 0 : currentPageIndex)">{{ pageArray.length < 4 ? 1 : currentPageIndex+1 < pageArray.length ? currentPageIndex+1 : currentPageIndex }}</button>
-      <button v-show="pageArray.length > 1" @click="pageSkip(pageArray.length < 4 ? 1 : currentPageIndex+1)">{{ pageArray.length < 4 ? 2 : currentPageIndex+1 < pageArray.length ? currentPageIndex+2 : currentPageIndex+1 }}</button> -->
-      <button v-show="pageArray.length > 2" @click="pageSkip(pageArray.length < 4 ? 2 : false)">{{ pageArray.length < 4 ? 3 : '...' }}</button>
-      <button v-show="pageArray.length > 3" @click="pageSkip(pageArray.length-1)">{{ pageArray.length }}</button>
+      <button v-show="button_1_display" @click="pageSkip(0)" :style="{ backgroundColor: backgoundChange(1) ? 'rgba(0, 0, 0, 0.08)' : 'transparent' }" class="pageCount">1</button><!--第一页-->
+      <button v-show="button_2_display" class="omit">...</button>
+      <button v-for="(data, index) in buttonArray" :key="index" @click="pageSkip(data-1)" :style="{ backgroundColor: backgoundChange(data) ? 'rgba(0, 0, 0, 0.08)' : 'transparent' }" class="pageCount">{{ data }}</button><!--中间页-->
+      <button v-show="button_3_display" class="omit">...</button>
+      <button v-show="button_4_display" @click="pageSkip(pageArray.length-1)" :style="{ backgroundColor: backgoundChange(pageArray.length) ? 'rgba(0, 0, 0, 0.08)' : 'transparent' }" class="pageCount">{{ pageArray.length }}</button><!--最后一页-->
       <button v-show="currentPageIndex < pageArray.length - 1" @click="downPage">后一页&nbsp;&raquo;</button>
     </div>
   </div>
@@ -163,7 +224,7 @@
         border-color: rgba(0, 0, 0, 0.07);
       }
     }
-    .buttons {
+    .paging {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -186,9 +247,18 @@
         width: 70px;
         padding-bottom: 4px;
       }
-    }
-    .pitch {
-      background-color: rgba(0, 0, 0, 0.08);
-    }
+      .pageCount {
+        font-family: JetBrainsMono, sans-serif;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.08) !important;
+        }
+      }
+      .omit {
+        cursor: text;
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    } 
   }
 </style>

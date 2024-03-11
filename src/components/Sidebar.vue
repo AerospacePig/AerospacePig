@@ -5,7 +5,7 @@
     <ul>
       <li class="item-caprice">
         <h4>随想:</h4>
-        <p>“&nbsp;最近对伪娘上瘾, 想穿女装...&nbsp;”</p>
+        <p class="caprice">“&nbsp;最近对伪娘上瘾, 想穿女装...&nbsp;”</p>
         <!-- <p>"&nbsp;沧浪之水清兮，可以濯我缨。沧浪之水浊兮，可以濯我足。"<br/>——&nbsp;先秦 · 佚名</p> -->
       </li>
       <li class="item-blogroll">
@@ -50,13 +50,16 @@
             text-decoration-color: rgba(0, 0, 0, 0.2);
             padding-bottom: 0.2vh;
             &:link, &:visited, &:active {
-              color: rgba(0, 90, 170, 1);;
+              color: rgba(0, 90, 170, 1);
             }
             &:hover {
               color: rgba(0, 0, 0, 1);
               opacity: 0.7;
             }
           }
+        }
+        .caprice {
+          color: rgba(0, 90, 170, 1);
         }
       }
     }
