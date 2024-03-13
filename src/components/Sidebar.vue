@@ -8,6 +8,14 @@
         <p class="caprice">“&nbsp;最近对伪娘上瘾, 想穿女装...&nbsp;”</p>
         <!-- <p>"&nbsp;沧浪之水清兮，可以濯我缨。沧浪之水浊兮，可以濯我足。"<br/>——&nbsp;先秦 · 佚名</p> -->
       </li>
+      <li class="classify">
+        <h4>分类:</h4>
+        <p>编程生涯</p>
+        <p>闲言碎语</p>
+        <p>书籍阅读</p>
+        <p>Galgame相关</p>
+        <p>其它</p>
+      </li>
       <li class="item-blogroll">
         <h4>友链:</h4>
         <p><a href="https://nicebowl.fun/">NiceBowl的博客</a></p>
@@ -30,11 +38,11 @@
       padding: 0;
       margin: 30px 0;
       li {
-        margin: 40px 0;
+        margin: 30px 0;
         white-space: normal;
         list-style-type: none;
         h4 {
-          margin: 10px 0;
+          margin: 20px 0;
           font-weight: 700;
           color: rgba(0, 0, 0, 0.7);
         }
@@ -60,6 +68,20 @@
         }
         .caprice {
           color: rgba(0, 90, 170, 1);
+        }
+      }
+      .classify {
+        p {
+          color: rgba(0, 90, 170, 1);
+          cursor: pointer;
+          text-decoration: underline;
+          text-underline-offset: 5px;
+          text-decoration-color: rgba(0, 0, 0, 0.2);
+          padding-bottom: 0.2vh;
+          &:hover {
+            color: rgba(0, 0, 0, 1);
+            opacity: 0.7;
+          }
         }
       }
     }

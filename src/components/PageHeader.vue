@@ -3,7 +3,7 @@
 <template>
   <div class="header">
     <p class="header-titel">AerospacePig</p>
-    <p class="header-describe">Write some essays or daily notes, or write something interesting.</p>
+    <p class="header-describe">Write down programming notes, essays, reading notes, and Galgame-related notes.</p>
   </div>
 </template>
 
