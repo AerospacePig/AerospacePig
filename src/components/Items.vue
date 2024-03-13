@@ -34,7 +34,7 @@
   }
 
   const getBasicInf = () => {
-    axios.get('assets/jsons/db_1.json')
+    axios.get('/jsons/db_1.json')
     .then(retultJson => {
       objArray.value = Object.values(retultJson.data);
       splitObjArrayIntoPage();

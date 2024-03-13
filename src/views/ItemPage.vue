@@ -12,7 +12,7 @@
   }
 
   function requestContent(id) {
-    axios.get(`src/assets/markdowns/${id}.md`)
+    axios.get(`/markdowns/${id}.md`)
     .then(resultMarkdown => {
       const options = { 
         gfm: true, // github的Markdown风格
