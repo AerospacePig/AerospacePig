@@ -1,9 +1,8 @@
 <script setup>    
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, watch, defineProps } from 'vue';
   import { useRouter } from 'vue-router';
   import axios from 'axios';
 
-  const objArray = ref([]);
   const pitchIndex = ref(0);
   const pageArray = ref([]); // 拆分好的页面数组
   const currentPageArray = ref([]); // 当前页面
@@ -11,6 +10,14 @@
   const router  = useRouter();
   const currentRoute = () => {
     return router.currentRoute.value.name
+  }
+  const props = defineProps({
+    classify: String,
+    screenSize: String
+  })
+
+  const toHome = () => {
+    router.push('/');
   }
 
   const toItemPage = (index) => {
@@ -23,25 +30,55 @@
     })
   }
 
-  const splitObjArrayIntoPage = () => {
+  const splitObjArrayIntoPage = (objArray) => {
+    let pageArray =[];
     const eachPageItemCount = 10; // 默认为10
     let pageCount = eachPageItemCount;
 
-    for (let i = 0; i < objArray.value.length; i += eachPageItemCount) {
-      pageArray.value.push(objArray.value.slice(i, pageCount)); // slice的拆分结果返回一个新数组
+    for (let i = 0; i < objArray.length; i += eachPageItemCount) {
+      pageArray.push(objArray.slice(i, pageCount)); // slice的拆分结果返回一个新数组
       pageCount += eachPageItemCount;
     }
+    return pageArray;
   }
 
-  const getBasicInf = () => {
-    axios.get('/jsons/db_1.json')
+  const getAllBasicInf = () => {
+    axios.get('/jsons/db_1.json', {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
     .then(retultJson => {
-      objArray.value = Object.values(retultJson.data);
-      splitObjArrayIntoPage();
-      currentPageArray.value = pageArray.value[currentPageIndex.value];
+      const objArray = Object.values(retultJson.data);
+      pageArray.value = splitObjArrayIntoPage(objArray);
+      currentPageArray.value = pageArray.value[0];
       buttonDisplay();
     })
   }
+
+  const getClassifyInf = (classifyName) => {
+    if (classifyName === '首页') {
+      getAllBasicInf();
+      return ;
+    }
+    axios.get('/jsons/db_1.json', {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(retultJson => {
+      toHome();
+      const result = Object.values(retultJson.data)
+      const objArray = result.filter(obj => obj.classify === classifyName)
+      pageArray.value = splitObjArrayIntoPage(objArray);
+      currentPageArray.value = pageArray.value[0];
+      buttonDisplay();
+    })
+  }
+
+  watch(() => props.classify, (classifyName) => {
+    getClassifyInf(classifyName);
+  })
 
   const upPage = () => {
     if (currentPageIndex.value > 0) {
@@ -139,7 +176,7 @@
   }
 
   onMounted(() => {
-    getBasicInf();
+    getAllBasicInf();
   })
 </script>
 
@@ -147,16 +184,16 @@
   <div class="container">
     <div class="item" v-for="(obj, index) in currentPageArray" :key="index">
       <div v-if="handlePitch(index)">
-        <div class="header">
-          <span v-show="obj.top">[置顶]</span>
+        <div class="header" :class="{ 'small-header': props.screenSize === 'small'}">
+          <span v-show="obj.top && currentRoute() === 'home'">[置顶]</span>
           <h2 class="title" :class="{ 'title-1': currentRoute() === 'home' }" @click="toItemPage(index)">{{ obj.titel }}</h2>
         </div>
-        <div class="basic-inf">
+        <div class="basic-inf" :class="{ 'small-basic-inf': props.screenSize === 'small'}">
           <span>作者:&nbsp;{{ obj.author }}</span>
           <span>分类:&nbsp;{{ obj.classify }}</span>
           <span>日期:&nbsp;{{ obj.date }}</span>
         </div>
-        <div class="describe">{{ obj.describe }}</div>
+        <div class="describe" :class="{ 'small-describe': props.screenSize === 'small'}">{{ obj.describe }}</div>
         <hr/>
       </div>
     </div>
@@ -200,6 +237,17 @@
           }
         }
       }
+      .small-header {
+        font-size: 12px;
+        justify-content: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        span {
+          font-size: 16px;
+          padding-bottom: 3px;
+        }
+      }
       .basic-inf {
         margin: 10px 0;
         span {
@@ -215,9 +263,20 @@
           padding-left: 0;
         }
       }
+      .small-basic-inf {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        span {
+          font-size: 12px !important;
+        }
+      }
       .describe {
         height: auto;
         white-space: normal; // 正常换行
+      }
+      .small-describe {
+        font-size: 13px;
       }
       hr {
         margin: 15px 0;
@@ -259,6 +318,6 @@
           background-color: transparent;
         }
       }
-    } 
+    }
   }
 </style>

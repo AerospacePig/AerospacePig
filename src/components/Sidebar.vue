@@ -1,4 +1,11 @@
-<script setup></script>
+<script setup>
+  import { defineEmits } from 'vue';
+
+  const emit = defineEmits(['transitive-classify'])
+  const handleClick = (classifyName) => {
+    emit('transitive-classify', classifyName);
+  }
+</script>
 
 <template>
   <div class="page-sidebar">
@@ -10,11 +17,11 @@
       </li>
       <li class="classify">
         <h4>分类:</h4>
-        <p>编程生涯</p>
-        <p>闲言碎语</p>
-        <p>书籍阅读</p>
-        <p>Galgame相关</p>
-        <p>其它</p>
+        <p @click="handleClick('编程生涯')">编程生涯</p>
+        <p @click="handleClick('闲言碎语')">闲言碎语</p>
+        <p @click="handleClick('书籍阅读')">书籍阅读</p>
+        <p @click="handleClick('Galgame相关')">Galgame相关</p>
+        <p @click="handleClick('首页')">首页</p>
       </li>
       <li class="item-blogroll">
         <h4>友链:</h4>
@@ -26,7 +33,7 @@
       </li>
       <li class="item-about">
         <h4>关于:</h4>
-        <p>声明:&nbsp;这个网站的UI是直接模仿<a href="https://nicebowl.fun/">@NiceBowl&nbsp;</a>的博客, 当初看到这个作者的博客那精简的UI一眼就爱上了, 所以自己用Vue也模仿了一个...(笑), <i style="text-decoration: line-through;">另外, 这位博主爱搞黄色的爱好很对我口味儿。</i></p>
+        <p>声明:&nbsp;这个网站的UI是直接模仿<a href="https://nicebowl.fun/">@NiceBowl&nbsp;</a>的博客, 当初看到这个作者的博客那精简的UI一眼就爱上了, 所以自己用Vue3也模仿了一个...(我已经尽可能去还原了), <i style="text-decoration: line-through;">另外, 这位博主爱搞黄色的爱好很对我口味儿。</i></p>
       </li>
     </ul>
   </div>

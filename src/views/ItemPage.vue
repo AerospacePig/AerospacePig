@@ -1,19 +1,32 @@
 <script setup>
-  import { ref, onMounted, watch } from 'vue';
+  import { ref, onMounted, watch, defineEmits, defineProps } from 'vue';
   import { marked } from 'marked';
   import axios from 'axios';
   import { useRoute, useRouter } from "vue-router";
 
+  const loading = ref(false);
   const itemContent = ref(null);
   const route = useRoute();
   const router  = useRouter();
   const currentRoute = () => {
     return router.currentRoute.value.name
   }
+  const props = defineProps({
+    screenSize: String
+  })
+  const emit = defineEmits(['loading'])
+  const handleLoading = () => {
+    emit('loading', loading.value);
+  }
+  watch(loading, () => {
+    handleLoading();
+  })
 
   function requestContent(id) {
+    loading.value = true;
     axios.get(`/markdowns/${id}.md`)
     .then(resultMarkdown => {
+      loading.value = false;
       const options = { 
         gfm: true, // github的Markdown风格
         breaks: true, // 换行显示为<hr/>
@@ -38,37 +51,27 @@
 </script>
 
 <template>
-  <div class="item-container">
+  <div class="item-container" :style="{ fontSize: props.screenSize === 'small' ? '13px' : '15px'}">
     <div class="item-content" v-show="itemContent" v-html="itemContent"></div>
   </div>
 </template>
 
 <style scoped lang="scss">
   .item-container {
-    .item-header {
-      .title {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: rgba(0, 90, 170, 1);
-      }
-      .basic-inf {
-        margin: 10px 0;
-        span {
-          font-weight: 500;
-          font-size: 14px;
-          color: rgba(0, 0, 0, 0.5);
-          width: auto;
-          padding: 5px 10px;
-          margin: 0;
-          border-right: 1px solid rgba(0, 0, 0, 0.1);
-        }
-        span:nth-child(1) {
-          padding-left: 0;
-        }
-      }
-    }
     .item-content {
       white-space: normal;
     }
+  }
+</style>
+<style>
+  .item-content > p {
+    color: rgba(0, 0, 0, 0.55);
+  }
+  a:link, a:visited, a:active {
+    color: rgba(0, 90, 170, 1);
+  }
+  a:hover {
+    color: rgba(0, 0, 0, 1);
+    opacity: 0.7;
   }
 </style>

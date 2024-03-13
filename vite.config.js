@@ -5,7 +5,6 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
   base: './',
-  mode: 'history', // 去除'#'
   build: {
     assetsDir: 'assets',
     cssCodeSplit: false, // 是否拆分css, 默认按模块拆分
