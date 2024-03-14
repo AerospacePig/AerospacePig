@@ -12,14 +12,19 @@
   const classify = ref('');
   const screenSize = ref('');
   const router  = useRouter();
+  const toHome = () => {
+    router.push('/');
+  }
   const currentRoute = () => {
     return router.currentRoute.value.name
   }
   const emit = defineEmits(['screen-size'])
 
   const transferClassify = (value) => {
+    toHome();
     classify.value = value;
   }
+  
   const startLoading = (value) => {
     loading.value = value;
   }

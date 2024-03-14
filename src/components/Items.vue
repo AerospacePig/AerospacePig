@@ -3,7 +3,7 @@
   import { useRouter } from 'vue-router';
   import axios from 'axios';
 
-  const pitchIndex = ref(0);
+  const pitchIndex = ref(-1);
   const pageArray = ref([]); // 拆分好的页面数组
   const currentPageArray = ref([]); // 当前页面
   const currentPageIndex = ref(0); // 当前页面索引
@@ -50,6 +50,7 @@
     })
     .then(retultJson => {
       const objArray = Object.values(retultJson.data);
+      objArray.shift(); // 去除第 1 个, 也就是id为0的自我介绍那篇
       pageArray.value = splitObjArrayIntoPage(objArray);
       currentPageArray.value = pageArray.value[0];
       buttonDisplay();
@@ -57,10 +58,6 @@
   }
 
   const getClassifyInf = (classifyName) => {
-    if (classifyName === '首页') {
-      getAllBasicInf();
-      return ;
-    }
     axios.get('/jsons/db_1.json', {
       headers: {
         'Content-Type': 'application/json',
@@ -77,7 +74,11 @@
   }
 
   watch(() => props.classify, (classifyName) => {
-    getClassifyInf(classifyName);
+    if (classifyName === '首页') {
+      getAllBasicInf();
+    } else {
+      getClassifyInf(classifyName);
+    }
   })
 
   const upPage = () => {
@@ -189,9 +190,9 @@
           <h2 class="title" :class="{ 'title-1': currentRoute() === 'home' }" @click="toItemPage(index)">{{ obj.titel }}</h2>
         </div>
         <div class="basic-inf" :class="{ 'small-basic-inf': props.screenSize === 'small'}">
-          <span>作者:&nbsp;{{ obj.author }}</span>
-          <span>分类:&nbsp;{{ obj.classify }}</span>
+          <span @click="toItemPage(-1)">作者:&nbsp;<a>{{ obj.author }}</a></span>
           <span>日期:&nbsp;{{ obj.date }}</span>
+          <span @click="getClassifyInf(obj.classify)">分类:&nbsp;<a>{{ obj.classify }}</a></span>
         </div>
         <div class="describe" :class="{ 'small-describe': props.screenSize === 'small'}">{{ obj.describe }}</div>
         <hr/>
@@ -258,6 +259,18 @@
           padding: 5px 10px;
           margin: 0;
           border-right: 1px solid rgba(0, 0, 0, 0.1);
+          a {
+            color: rgba(0, 90, 170, 1);
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 5px;
+            text-decoration-color: rgba(0, 0, 0, 0.2);
+            padding-bottom: 0.2vh;
+            &:hover {
+              color: rgba(0, 0, 0, 1);
+              opacity: 0.7;
+            }
+          }
         }
         span:nth-child(1) {
           padding-left: 0;

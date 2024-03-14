@@ -1,18 +1,50 @@
 {
+    "0": {
+        "titel": "关于AerospacePig",
+        "author": "AerospacePig",
+        "date": "2024.3.14-14:55",
+        "classify": "闲言碎语",
+        "top": false,
+        "describe": "这应该算自我介绍吧, 说起来, 从小到大最讨厌自我介绍...尤其要上讲台那种"
+    },
     "1": {
-        "titel": "2024年3月12日, 成功部署第一个网站",
+        "titel": "2024年3月12日, 部署本网站",
         "author": "AerospacePig",
         "date": "2024.3.11-22:22",
         "classify": "编程生涯",
-        "top": true,
-        "describe": "虽然这并不是我编写的第一个网站(此前已经写过两个博客, 两个小说阅读器), 但这是我成功部署的第一个网站"
+        "top": false,
+        "describe": "本博客专为自己个人打造, 为自己个人而生"
     },
     "2": {
-        "titel": "test其它分类",
+        "titel": "关于vite打包时, src目录下的json文件无法打包进去",
         "author": "AerospacePig",
-        "date": "2024.3.13-17:48",
-        "classify": "闲言碎语",
+        "date": "2024.3.14-13:02",
+        "classify": "编程生涯",
         "top": false,
-        "describe": "test其它分类test其它分类test其它分类test其它分类test其它分类test其它分类test其它分类"
+        "describe": "可以将json文件放进public文件夹中(有一个弊端是无法再用import直接导入json文件)"
+    },
+    "3": {
+        "titel": "关于子集化字体",
+        "author": "AerospacePig",
+        "date": "2024.3.14-13:31",
+        "classify": "编程生涯",
+        "top": false,
+        "describe": "原理是重构字体文件, 从字体文件中截取实际用到的字体, 而抛弃其它没有用到的空闲字体"
+    },
+    "4": {
+        "titel": "读《金锁记》",
+        "author": "AerospacePig",
+        "date": "2024.3.1-14:28",
+        "classify": "书籍阅读",
+        "top": false,
+        "describe": "《金锁记》—— 张爱玲"
+    },
+    "5": {
+        "titel": "读《小王子》第三遍",
+        "author": "AerospacePig",
+        "date": "2024.1.20-12:02",
+        "classify": "书籍阅读",
+        "top": false,
+        "describe": "美的东西是看不见摸不着嗅不到的，唯有用心才能感知到美的存在。"
     }
 }

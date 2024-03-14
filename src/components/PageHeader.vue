@@ -31,9 +31,6 @@
       font-family: SquareItalics, sans-serif;
       font-size: 50px;
       cursor: pointer;
-      &:hover {
-        color: rgba(0, 90, 170, 1);
-      }
     }
     .header-describe {
       height: 40%;

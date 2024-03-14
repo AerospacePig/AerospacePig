@@ -1,6 +1,7 @@
 <script setup>
   import { ref, onMounted, watch, defineEmits, defineProps } from 'vue';
   import { marked } from 'marked';
+  import { hljs } from 'highlight.js';
   import axios from 'axios';
   import { useRoute, useRouter } from "vue-router";
 
@@ -30,6 +31,12 @@
       const options = { 
         gfm: true, // github的Markdown风格
         breaks: true, // 换行显示为<hr/>
+        sanitize: false, // 启用html标签转义
+        smartLists: false, // 智能列表
+        smartypants: false, // 智能标点
+        highlight: function(code) {
+          return hljs.highlightAuto(code).value;
+        }
       }
       itemContent.value = marked(resultMarkdown.data, options);
     })
@@ -73,5 +80,33 @@
   a:hover {
     color: rgba(0, 0, 0, 1);
     opacity: 0.7;
+  }
+  pre {
+    display: block;
+    background-color:#f3f3f3;
+    padding: .5rem;
+    overflow-y: auto;
+    font-weight: 300;
+    font-family: Menlo, monospace;
+    border-radius: .3rem;
+  }
+  pre {
+    background-color: #283646;
+  }
+  pre > code{
+    border: 0px;
+    background-color: #283646;
+    color: #FFF;
+  }
+  code {
+    display: inline-block ;
+    background-color:#f3f3f3;
+    border:1px solid #fdb9cc;
+    border-radius:3px;
+    font-size: 12px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color:#4f4f4f;
+    margin: 0px 3px;
   }
 </style>

@@ -2,9 +2,9 @@
 
 <template>
   <div class="foot-content">
-    <p><a href="https://github.com/AerospacePig">@AerospacePig&nbsp;</a>的博客, 暂时先在GitHub免费挂着, 就是慢了点...(笑)</p>
+    <p><a href="https://github.com/AerospacePig">@AerospacePig&nbsp;</a>的博客, 只为自己用心写每一篇博文</p>
     <p>本博客文章皆为原创, 版权归作者AerospacePig所有。</p>
-    <p>所有文章从未向任何个人或组织授权转载过, 严禁任何人以任何形式转载或抄袭文章内容（但非常欢迎转发文章链接）！</p>
+    <p>所有文章从未向任何个人或组织授权转载过, 严禁任何人以任何形式转载或抄袭文章内容！</p>
   </div>
 </template>
 
