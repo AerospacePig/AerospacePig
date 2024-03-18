@@ -3,7 +3,7 @@
   import { useRouter } from 'vue-router';
   import axios from 'axios';
 
-  const pitchIndex = ref(-1);
+  const pitchId = ref(-1);
   const pageArray = ref([]); // 拆分好的页面数组
   const currentPageArray = ref([]); // 当前页面
   const currentPageIndex = ref(0); // 当前页面索引
@@ -20,12 +20,12 @@
     router.push('/');
   }
 
-  const toItemPage = (index) => {
-    pitchIndex.value = index;
+  const toItemPage = (id) => {
+    pitchId.value = id;
     router.push({
       name: 'itemPage',
       params: {
-        id: index+1,
+        id: id,
       },
     })
   }
@@ -42,6 +42,12 @@
     return pageArray;
   }
 
+  const topFilter = (array) => {
+    let topElement = array.filter(obj => obj.top);
+    let noTopElement = array.filter(obj => ! obj.top);
+    return [...topElement, ...noTopElement]; // 保证置顶元素在非置顶之前
+  }
+
   const getAllBasicInf = () => {
     axios.get('/jsons/db_1.json', {
       headers: {
@@ -49,8 +55,9 @@
       }
     })
     .then(retultJson => {
-      const objArray = Object.values(retultJson.data);
+      let objArray = Object.values(retultJson.data);
       objArray.shift(); // 去除第 1 个, 也就是id为0的自我介绍那篇
+      objArray = topFilter(objArray);
       pageArray.value = splitObjArrayIntoPage(objArray);
       currentPageArray.value = pageArray.value[0];
       buttonDisplay();
@@ -65,7 +72,9 @@
     })
     .then(retultJson => {
       toHome();
-      const result = Object.values(retultJson.data)
+      let result = Object.values(retultJson.data);
+      result.shift();
+      result = topFilter(result);
       const objArray = result.filter(obj => obj.classify === classifyName)
       pageArray.value = splitObjArrayIntoPage(objArray);
       currentPageArray.value = pageArray.value[0];
@@ -161,11 +170,10 @@
     }
   }
 
-  const handlePitch = (index) => {
+  const handlePitch = (id) => {
     if (currentRoute() === 'home') {
-      pitchIndex.value = 0;
       return true;
-    } else if (pitchIndex.value === index) {
+    } else if (pitchId.value === id) {
       return true;
     } else {
       return false;
@@ -184,13 +192,13 @@
 <template>
   <div class="container">
     <div class="item" v-for="(obj, index) in currentPageArray" :key="index">
-      <div v-if="handlePitch(index)">
+      <div v-if="handlePitch(obj.id)">
         <div class="header" :class="{ 'small-header': props.screenSize === 'small'}">
           <span v-show="obj.top && currentRoute() === 'home'">[置顶]</span>
-          <h2 class="title" :class="{ 'title-1': currentRoute() === 'home' }" @click="toItemPage(index)">{{ obj.titel }}</h2>
+          <h2 class="title" :class="{ 'title-1': currentRoute() === 'home' }" @click="toItemPage(obj.id)">{{ obj.titel }}</h2>
         </div>
         <div class="basic-inf" :class="{ 'small-basic-inf': props.screenSize === 'small'}">
-          <span @click="toItemPage(-1)">作者:&nbsp;<a>{{ obj.author }}</a></span>
+          <span @click="toItemPage(id=0)">作者:&nbsp;<a>{{ obj.author }}</a></span>
           <span>日期:&nbsp;{{ obj.date }}</span>
           <span @click="getClassifyInf(obj.classify)">分类:&nbsp;<a>{{ obj.classify }}</a></span>
         </div>
@@ -229,7 +237,7 @@
           margin: 0;
           overflow: hidden;
           text-overflow: ellipsis;
-          color: rgba(0, 90, 170, 1);
+          color: rgb(24, 100, 167);
         }
         .title-1 {
           cursor: pointer;

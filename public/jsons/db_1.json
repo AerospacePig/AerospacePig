@@ -1,5 +1,6 @@
 {
     "0": {
+        "id": "0",
         "titel": "关于AerospacePig",
         "author": "AerospacePig",
         "date": "2024.3.14-14:55",
@@ -8,6 +9,7 @@
         "describe": "这应该算自我介绍吧, 说起来, 从小到大最讨厌自我介绍...尤其要上讲台那种"
     },
     "1": {
+        "id": "1",
         "titel": "2024年3月12日, 部署本网站",
         "author": "AerospacePig",
         "date": "2024.3.11-22:22",
@@ -16,6 +18,7 @@
         "describe": "本博客专为自己个人打造, 为自己个人而生"
     },
     "2": {
+        "id": "2",
         "titel": "关于vite打包时, src目录下的json文件无法打包进去",
         "author": "AerospacePig",
         "date": "2024.3.14-13:02",
@@ -24,6 +27,7 @@
         "describe": "可以将json文件放进public文件夹中(有一个弊端是无法再用import直接导入json文件)"
     },
     "3": {
+        "id": "3",
         "titel": "关于子集化字体",
         "author": "AerospacePig",
         "date": "2024.3.14-13:31",
@@ -32,19 +36,66 @@
         "describe": "原理是重构字体文件, 从字体文件中截取实际用到的字体, 而抛弃其它没有用到的空闲字体"
     },
     "4": {
+        "id": "4",
         "titel": "读《金锁记》",
         "author": "AerospacePig",
         "date": "2024.3.1-14:28",
-        "classify": "书籍阅读",
+        "classify": "阅读笔记",
         "top": false,
         "describe": "《金锁记》—— 张爱玲"
     },
     "5": {
+        "id": "5",
         "titel": "读《小王子》第三遍",
         "author": "AerospacePig",
         "date": "2024.1.20-12:02",
-        "classify": "书籍阅读",
+        "classify": "阅读笔记",
         "top": false,
         "describe": "美的东西是看不见摸不着嗅不到的，唯有用心才能感知到美的存在。"
+    },
+    "6": {
+        "id": "6",
+        "titel": "网文阅读记录",
+        "author": "AerospacePig",
+        "date": "2024.3.14-22:02",
+        "classify": "阅读笔记",
+        "top": true,
+        "describe": "私以为读过的网文也不少了, 虽然大多是毫无意义的消遣之作, 但姑且记录下来, 权当可以回忆的过去。"
+    },
+    "7": {
+        "id": "7",
+        "titel": "文学阅读记录",
+        "author": "AerospacePig",
+        "date": "2022.8.??-??:??",
+        "classify": "阅读笔记",
+        "top": true,
+        "describe": "每天阅读文学一小时, 至今这个习惯已经坚持一年, 阅读这件事本身有无意义已经不重要了, 因为我逐渐体会到这种坚持本身, 已经成为了一种有趣的意义。"
+    },
+    "8": {
+        "id": "8",
+        "titel": "动漫观感记录",
+        "author": "AerospacePig",
+        "date": "2024.3.14-22:20",
+        "classify": "二次元相关",
+        "top": true,
+        "describe": "以前找学习资料的能力尚且低微的时候, 大多数时间都靠这东西聊以慰藉, 不记录下来怎么行 ?"
+    },
+    "9": {
+        "id": "9",
+        "titel": "Galgame游玩记录",
+        "author": "AerospacePig",
+        "date": "2024.1.05-17:14",
+        "classify": "二次元相关",
+        "top": true,
+        "describe": "相见恨晚, 相见恨晚呐 !"
+    },
+    "10": {
+        "id": "10",
+        "titel": "駄作-游玩体验",
+        "author": "AerospacePig",
+        "date": "2024.1.29-16:52",
+        "classify": "二次元相关",
+        "top": false,
+        "describe": "扶她? 为什么是扶她 ?! 最讨厌扶她 !"
     }
 }

@@ -19,8 +19,8 @@
         <h4>分类:</h4>
         <p @click="handleClick('编程生涯')">编程生涯</p>
         <p @click="handleClick('闲言碎语')">闲言碎语</p>
-        <p @click="handleClick('书籍阅读')">书籍阅读</p>
-        <p @click="handleClick('Galgame相关')">Galgame相关</p>
+        <p @click="handleClick('书籍阅读')">阅读笔记</p>
+        <p @click="handleClick('Galgame相关')">二次元相关</p>
         <p class="home-page" @click="handleClick('首页')">首页</p>
       </li>
       <li class="item-blogroll">
@@ -34,7 +34,7 @@
       </li>
       <li class="item-about">
         <h4>关于:</h4>
-        <p>声明:&nbsp;这个网站的UI是直接模仿<a href="https://nicebowl.fun/">@NiceBowl&nbsp;</a>的博客(这位是大佬, 是我只能仰望的存在), 当初看到这个作者的博客那精简的UI一眼就爱上了, 所以自己用Vue3也模仿了一个...(我已经尽可能去还原了), <i style="text-decoration: line-through;">另外, 这位博主爱搞黄色的爱好很对我口味儿。</i></p>
+        <p>声明:&nbsp;这个网站的UI是直接模仿<a href="https://nicebowl.fun/">@NiceBowl&nbsp;</a>的博客(这位是真大佬, 是我只能仰望的存在), 当初看到这个作者的博客那精简的UI一眼就爱上了, 所以自己用Vue3也模仿了一个...(我已经尽可能去还原了), <a href="https://github.com/AerospacePig/AerospacePig">附: 本站源码: GitHub</a></p>
       </li>
     </ul>
   </div>
@@ -75,7 +75,7 @@
           }
         }
         .caprice {
-          color: rgba(0, 90, 170, 1);
+          color: rgb(244, 175, 92);
         }
       }
       .classify {
