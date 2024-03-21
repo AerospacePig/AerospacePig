@@ -97,5 +97,32 @@
         "classify": "二次元相关",
         "top": false,
         "describe": "扶她? 为什么是扶她 ?! 最讨厌扶她 !"
+    },
+    "11": {
+        "id": "11",
+        "titel": "3月21, 今天开始从零学Java",
+        "author": "AerospacePig",
+        "date": "2024.3.21-14:06",
+        "classify": "编程生涯",
+        "top": false,
+        "describe": "没什么好说的, 为了面向自己实现更多的需求, 必须学了."
+    },
+    "12": {
+        "id": "12",
+        "titel": "随笔",
+        "author": "AerospacePig",
+        "date": "2024.3.21-00:42",
+        "classify": "闲言碎语",
+        "top": false,
+        "describe": "我也不知道为什么会写出这样一段没头没脑的碎文字。兴许一开始是想写个短篇故事的。"
+    },
+    "13": {
+        "id": "13",
+        "titel": "随笔",
+        "author": "AerospacePig",
+        "date": "2024.3.21-00:42",
+        "classify": "闲言碎语",
+        "top": false,
+        "describe": "最近开始学日语。浅浅记录一下。"
     }
 }
