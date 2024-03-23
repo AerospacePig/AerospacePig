@@ -34,7 +34,7 @@
       </li>
       <li class="item-about">
         <h4>关于:</h4>
-        <p>声明:&nbsp;这个网站的UI是直接模仿<a href="https://nicebowl.fun/">@NiceBowl&nbsp;</a>的博客(这位是真大佬, 是我只能仰望的存在), 当初看到这个作者的博客那精简的UI一眼就爱上了, 所以自己用Vue3也模仿了一个...(我已经尽可能去还原了), <a href="https://github.com/AerospacePig/AerospacePig">附: 本站源码: GitHub</a></p>
+        <p>声明:&nbsp;这个网站的UI是直接模仿<a href="https://nicebowl.fun/">@NiceBowl&nbsp;</a>的博客(这位是真大佬, 是我只能仰望的存在), 当初看到这个作者的博客那精简的UI一眼就爱上了, 所以自己用Vue3也模仿了一个...(我已经尽可能去还原了), <a href="https://github.com/AerospacePig/AerospacePig">附: 源码: GitHub</a></p>
       </li>
     </ul>
   </div>
