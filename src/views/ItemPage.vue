@@ -81,6 +81,10 @@
     color: rgba(0, 0, 0, 1);
     opacity: 0.7;
   }
+  .item-content > img {
+    width: 100%;
+    height: auto;
+  }
   pre {
     display: block;
     background-color:#f3f3f3;

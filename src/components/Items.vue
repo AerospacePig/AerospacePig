@@ -316,6 +316,7 @@
         border: none;
         outline: none;
         font-size: 15px;
+        white-space: nowrap;
         color: rgba(0, 90, 170, 1);
         background-color: transparent;
         &:hover {

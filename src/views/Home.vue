@@ -66,7 +66,7 @@
     <PageFoot></PageFoot>
   </div>
 
-  <div class="loading" v-if="loading">
+  <div class="loading" v-if="loading" :class="{ 'small-loading': screenSize === 'small' }">
     <Loading></Loading>
   </div>
 </template>
@@ -106,5 +106,8 @@
     transform: translate(275px, -750px);
     width: 40px;
     height: 40px;
+  }
+  .small-loading {
+    transform: translate(40vw, -1500px);
   }
 </style>
